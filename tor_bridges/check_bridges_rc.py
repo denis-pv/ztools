@@ -61,10 +61,10 @@ def main_simple():
             sock.close()
             
             if result == 0:
-                print(f"- works ({elapsed:.2f}с)")
+                print(f"- works ({elapsed:.2f}s)")
                 working_bridges.append(bridge_line)
             else:
-                print(f"- na ({elapsed:.2f}с)")
+                print(f"- na ({elapsed:.2f}s)")
                 
         except socket.timeout:
             print("..  timeout")
