@@ -49,8 +49,7 @@ def main_simple():
         # Проверка порта
         print(f"[{i}/{len(matches)}] {ip}:{port}", end=' - ')
         
-        try:
-            print("sock")
+        try:          
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(3)
             
@@ -61,10 +60,10 @@ def main_simple():
             sock.close()
             
             if result == 0:
-                print(f"- works ({elapsed:.2f}s)")
+                print(f"- ok ({elapsed:.2f}s)")
                 working_bridges.append(bridge_line)
             else:
-                print(f"- na ({elapsed:.2f}s)")
+                print(f"- n/a ({elapsed:.2f}s)")
                 
         except socket.timeout:
             print("..  timeout")
