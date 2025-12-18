@@ -4,7 +4,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import time
 
 def parse_bridges(filename):
-    """Парсинг файла с мостами"""
+   
     bridges = []
     try:
         with open(filename, 'r', encoding='utf-8') as f:
@@ -39,7 +39,7 @@ def parse_bridges(filename):
         return []
 
 def check_port(host, port, timeout=3):
-    """Проверка доступности порта"""
+    
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
             sock.settimeout(timeout)
@@ -55,7 +55,7 @@ def check_port(host, port, timeout=3):
         return False
 
 def check_bridge(bridge, timeout=3):
-    """Проверка одного моста"""
+    
     ip = bridge['ip']
     port = bridge['port']
     line = bridge['line']
