@@ -52,6 +52,7 @@ def main_simple():
         print(f"[{i}/{len(matches)}] {ip}:{port}", end=' - ')
         
         try:
+            print("sock")
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(3)
             
