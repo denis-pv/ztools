@@ -95,4 +95,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print("\n\nПрервано пользователем")
     except Exception as e:
-        print(f"\nОшибка: {e}")
+        print(f"\n Error: {e}")
