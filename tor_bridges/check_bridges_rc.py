@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 import socket
 import re
@@ -6,6 +7,7 @@ import sys
 import time
 
 def main_simple():
+    locale.setlocale(locale.LC_ALL, '')
     print("=" * 50)
     print("- check bridges")
     print("=" * 50)
