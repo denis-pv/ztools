@@ -127,7 +127,15 @@ def main_simple():
     
     if working_bridges:
         for i, bridge in enumerate(working_bridges, 1):
-            print(f"{bridge[:180]}..." if len(bridge) > 70 else f"{i:2d}. {bridge}")
+            print(f"{i:2d}. {bridge[:70]}..." if len(bridge) > 70 else f"{i:2d}. {bridge}")
+            
+        with open('bridges_works.torrc', 'w', encoding='utf-8') as f:
+            f.write("# Working bridges backup\n")
+            f.write("# Generated on: " + time.strftime("%Y-%m-%d %H:%M:%S") + "\n\n")
+            for bridge in working_bridges:
+                f.write(bridge + '\n')
+        print("\n[+] Saved to bridges_works.torrc")            
+
     else:
         print("   no working bridges")
     
