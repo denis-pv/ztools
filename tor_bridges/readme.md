@@ -9,5 +9,7 @@
  - проверяет доступность мостов из /etc/tor/torrc
  - рабочие складывает в файл bridges_works.torrc
 
+
 ## обновить под линукс и запустить одной коммандой
+	cd ztools/tor_bridges
 	git stash && git pull && chmod 777 *.py && ./check_bridges_rc.py
