@@ -72,10 +72,10 @@ def main_simple():
     
     # Вывод результатов
     print("\n" + "═" * 50)
-    print("📊 ИТОГИ:")
+    print("ИТОГИ:")
     print(f"   Всего проверено: {len(matches)}")
-    print(f"   ✅ Рабочих:      {len(working_bridges)}")
-    print(f"   ❌ Недоступных:  {len(matches) - len(working_bridges)}")
+    print(f"   Рабочих:      {len(working_bridges)}")
+    print(f"   Недоступных:  {len(matches) - len(working_bridges)}")
     
     if len(matches) > 0:
         percent = (len(working_bridges) / len(matches)) * 100
