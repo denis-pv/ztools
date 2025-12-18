@@ -9,9 +9,7 @@ import locale
 
 def main_simple():
     # Устанавливаем локаль для корректного вывода
-    locale.setlocale(locale.LC_ALL, '')
-    
-    # Заменяем все Unicode-символы на ASCII
+    #locale.setlocale(locale.LC_ALL, '')
     print("=" * 50)
     print("- check bridges")
     print("=" * 50)
