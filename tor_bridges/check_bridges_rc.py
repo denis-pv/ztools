@@ -45,7 +45,7 @@ def check_with_tor(bridge_line):
         return None
     except Exception:
         return False
-        
+
 
 
 def main_simple():
@@ -78,34 +78,34 @@ def main_simple():
     
     working_bridges = []
     
-     for i, match in enumerate(matches, 1):
-        ip = match[0]
-        port = int(match[1])
-        fingerprint = match[2]
-        cert = match[3]
-        
-        bridge_line = f"Bridge obfs4 {ip}:{port} {fingerprint} cert={cert} iat-mode=0"
-        
-        print(f"[{i}/{len(matches)}] {ip}:{port}", end=' - ')
-        
-        # 1. Базовая проверка порта
-        start = time.time()
-        port_open = check_port(ip, port)
-        elapsed = time.time() - start
-        
-        if not port_open:
-            print(f"PORT CLOSED ({elapsed:.1f}s)")
-            continue
-        
-        # 2. Продвинутая проверка через tor
-        tor_check = check_with_tor(bridge_line)
-        
-        if tor_check is True:
-            print(f"✓ VERIFIED ({elapsed:.1f}s)")
-        elif tor_check is None:
-            print(f"✓ PORT OPEN ({elapsed:.1f}s) [tor not installed]")
-        else:
-            print(f"✗ PORT OPEN BUT FAILED ({elapsed:.1f}s)")
+    for i, match in enumerate(matches, 1):
+       ip = match[0]
+       port = int(match[1])
+       fingerprint = match[2]
+       cert = match[3]
+       
+       bridge_line = f"Bridge obfs4 {ip}:{port} {fingerprint} cert={cert} iat-mode=0"
+       
+       print(f"[{i}/{len(matches)}] {ip}:{port}", end=' - ')
+       
+       # 1. Базовая проверка порта
+       start = time.time()
+       port_open = check_port(ip, port)
+       elapsed = time.time() - start
+       
+       if not port_open:
+           print(f"PORT CLOSED ({elapsed:.1f}s)")
+           continue
+       
+       # 2. Продвинутая проверка через tor
+       tor_check = check_with_tor(bridge_line)
+       
+       if tor_check is True:
+           print(f"✓ VERIFIED ({elapsed:.1f}s)")
+       elif tor_check is None:
+           print(f"✓ PORT OPEN ({elapsed:.1f}s) [tor not installed]")
+       else:
+           print(f"✗ PORT OPEN BUT FAILED ({elapsed:.1f}s)")
 
 💡 Вывод:
 
