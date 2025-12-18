@@ -10,7 +10,7 @@ def main_simple():
     print("- check bridges")
     print("=" * 50)
     
-    # Чтение файла torrc
+
     try:
         with open('/etc/tor/torrc', 'r', encoding='utf-8') as f:
             content = f.read()
