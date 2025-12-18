@@ -104,6 +104,7 @@ def main_simple():
        
        if tor_check is True:
            print(f" VERIFIED ({elapsed:.1f}s)")
+           working_bridges.append(bridge_line)
        elif tor_check is None:
            print(f" PORT OPEN ({elapsed:.1f}s) [tor not installed]")
        else:
@@ -113,9 +114,9 @@ def main_simple():
     # Вывод результатов - только ASCII символы!
     print("\n" + "=" * 50)
     print("RESULTS:")
-    print(f"   total checked: {len(matches)}")
-    print(f"   works        :      {len(working_bridges)}")
-    print(f"   n/a          :  {len(matches) - len(working_bridges)}")
+    print(f"   total checked : {len(matches)}")
+    print(f"   works         : {len(working_bridges)}")
+    print(f"   n/a           : {len(matches) - len(working_bridges)}")
     
     if len(matches) > 0:
         percent = (len(working_bridges) / len(matches)) * 100
