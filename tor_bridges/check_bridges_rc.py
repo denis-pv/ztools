@@ -18,10 +18,10 @@ def main_simple():
         with open('/etc/tor/torrc', 'r', encoding='utf-8') as f:
             content = f.read()
     except FileNotFoundError:
-        print("- Файл /etc/tor/torrc не найден")
+        print("- file /etc/tor/torrc not found")
         sys.exit(1)
     except PermissionError:
-        print("- Нет прав на чтение файла. Используйте sudo.")
+        print("- no rights, use sudo.")
         sys.exit(1)
     
     # Поиск мостов
@@ -32,8 +32,8 @@ def main_simple():
         print("- Мосты не найдены в файле torrc")
         sys.exit(1)
     
-    print(f"- Найдено мостов: {len(matches)}")
-    print("\n- Проверка доступности...\n")
+    print(f"- founded: {len(matches)}")
+    print("\n- check availabe...\n")
     
     working_bridges = []
     
@@ -60,35 +60,35 @@ def main_simple():
             sock.close()
             
             if result == 0:
-                print(f"- РАБОТАЕТ ({elapsed:.2f}с)")
+                print(f"- works ({elapsed:.2f}с)")
                 working_bridges.append(bridge_line)
             else:
-                print(f"- НЕДОСТУПЕН ({elapsed:.2f}с)")
+                print(f"- na ({elapsed:.2f}с)")
                 
         except socket.timeout:
-            print("..  ТАЙМАУТ")
+            print("..  timeout")
         except Exception as e:
-            print(f"..  ОШИБКА: {str(e)[:20]}")
+            print(f"..  error: {str(e)[:20]}")
     
     # Вывод результатов
     print("\n" + "=" * 50)
     print("ИТОГИ:")
-    print(f"   Всего проверено: {len(matches)}")
-    print(f"   Рабочих:      {len(working_bridges)}")
-    print(f"   Недоступных:  {len(matches) - len(working_bridges)}")
+    print(f"   total checked: {len(matches)}")
+    print(f"   works        :      {len(working_bridges)}")
+    print(f"   n/a          :  {len(matches) - len(working_bridges)}")
     
     if len(matches) > 0:
         percent = (len(working_bridges) / len(matches)) * 100
-        print(f"   - Процент:      {percent:.1f}%")
+        print(f"   - percent:      {percent:.1f}%")
     
-    print("\n- РАБОЧИЕ МОСТЫ:")
+    print("\n- works bridges:")
     print("-" * 50)
     
     if working_bridges:
         for i, bridge in enumerate(working_bridges, 1):
             print(f"{i:2d}. {bridge[:70]}..." if len(bridge) > 70 else f"{i:2d}. {bridge}")
     else:
-        print("   Нет рабочих мостов")
+        print("   no works bridges")
     
     print("═" * 50)
 
@@ -96,6 +96,6 @@ if __name__ == "__main__":
     try:
         main_simple()
     except KeyboardInterrupt:
-        print("\n\nПрервано пользователем")
+        print("\n\nuser terminated")
     except Exception as e:
         print(f"\n Error: {e}")
