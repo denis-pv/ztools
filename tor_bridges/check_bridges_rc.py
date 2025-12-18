@@ -8,12 +8,14 @@ import time
 import locale
 
 def main_simple():
+    # Устанавливаем локаль для корректного вывода
     locale.setlocale(locale.LC_ALL, '')
+    
+    # Заменяем все Unicode-символы на ASCII
     print("=" * 50)
     print("- check bridges")
     print("=" * 50)
     
-
     try:
         with open('/etc/tor/torrc', 'r', encoding='utf-8') as f:
             content = f.read()
@@ -68,11 +70,15 @@ def main_simple():
         except socket.timeout:
             print("..  timeout")
         except Exception as e:
-            print(f"..  error: {str(e)[:20]}")
+            # Убираем русские буквы из сообщения об ошибке
+            error_msg = str(e)
+            # Фильтруем не-ASCII символы
+            error_msg = ''.join(c if ord(c) < 128 else '?' for c in error_msg)
+            print(f"..  error: {error_msg[:20]}")
     
-    # Вывод результатов
+    # Вывод результатов - только ASCII символы!
     print("\n" + "=" * 50)
-    print("ИТОГИ:")
+    print("RESULTS:")
     print(f"   total checked: {len(matches)}")
     print(f"   works        :      {len(working_bridges)}")
     print(f"   n/a          :  {len(matches) - len(working_bridges)}")
@@ -81,16 +87,16 @@ def main_simple():
         percent = (len(working_bridges) / len(matches)) * 100
         print(f"   - percent:      {percent:.1f}%")
     
-    print("\n- works bridges:")
+    print("\n- working bridges:")
     print("-" * 50)
     
     if working_bridges:
         for i, bridge in enumerate(working_bridges, 1):
             print(f"{i:2d}. {bridge[:70]}..." if len(bridge) > 70 else f"{i:2d}. {bridge}")
     else:
-        print("   no works bridges")
+        print("   no working bridges")
     
-    print("═" * 50)
+    print("=" * 50)  # ЗАМЕНИЛИ "═" на обычный "="
 
 if __name__ == "__main__":
     try:
@@ -98,5 +104,7 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print("\n\nuser terminated")
     except Exception as e:
-        print(f"\n Error: {e}")
-
+        # Фильтруем не-ASCII символы в сообщении об ошибке
+        error_msg = str(e)
+        error_msg = ''.join(c if ord(c) < 128 else '?' for c in error_msg)
+        print(f"\n Error: {error_msg}")
