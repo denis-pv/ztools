@@ -15,7 +15,7 @@ def main_simple():
     
 
     try:
-        with open('/etc/tor/torrc', 'r', encoding='utf-8') as f:
+        with open('/etc/tor/torrc', 'r') as f:
             content = f.read()
     except FileNotFoundError:
         print("- file /etc/tor/torrc not found")
