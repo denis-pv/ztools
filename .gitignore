@@ -1,0 +1,4 @@
+get_updates.cmd
+pub_updates.cmd
+*.log
+.DS_Store
