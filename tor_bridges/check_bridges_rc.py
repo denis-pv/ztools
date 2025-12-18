@@ -6,6 +6,8 @@ import re
 import sys
 import time
 import locale
+import subprocess
+import tempfile
 
 def check_port(ip, port, timeout=3):
     """Базовая проверка TCP-порта"""
