@@ -127,7 +127,7 @@ def main_simple():
     
     if working_bridges:
         for i, bridge in enumerate(working_bridges, 1):
-            print(f"{i:2d}. {bridge[:70]}..." if len(bridge) > 70 else f"{i:2d}. {bridge}")
+            print(f"{{bridge[:180]}..." if len(bridge) > 70 else f"{i:2d}. {bridge}")
     else:
         print("   no working bridges")
     
