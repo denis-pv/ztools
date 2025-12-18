@@ -15,7 +15,7 @@ def main_simple():
     
 
     try:
-        with open('/etc/tor/torrc', 'r') as f:
+        with open('/etc/tor/torrc', 'r', encoding='utf-8') as f:
             content = f.read()
     except FileNotFoundError:
         print("- file /etc/tor/torrc not found")
@@ -29,7 +29,7 @@ def main_simple():
     matches = re.findall(bridge_pattern, content)
     
     if not matches:
-        print("- Мосты не найдены в файле torrc")
+        print("- bridges not found in torrc")
         sys.exit(1)
     
     print(f"- founded: {len(matches)}")
