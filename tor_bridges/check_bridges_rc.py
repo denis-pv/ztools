@@ -8,7 +8,7 @@ import time
 
 def main_simple():
     print("=" * 50)
-    print("- check bridges")
+    print("- check bridges ")
     print("=" * 50)
     
 
