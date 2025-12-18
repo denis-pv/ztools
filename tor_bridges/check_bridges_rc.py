@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-"""
-Упрощенная версия проверки мостов Tor
-"""
 
 import socket
 import re
