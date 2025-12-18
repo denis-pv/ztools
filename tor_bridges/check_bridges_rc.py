@@ -6,9 +6,9 @@ import sys
 import time
 
 def main_simple():
-    print("═" * 50)
+    print("=" * 50)
     print("- check bridges")
-    print("═" * 50)
+    print("=" * 50)
     
     # Чтение файла torrc
     try:
@@ -68,7 +68,7 @@ def main_simple():
             print(f"..  ОШИБКА: {str(e)[:20]}")
     
     # Вывод результатов
-    print("\n" + "═" * 50)
+    print("\n" + "=" * 50)
     print("ИТОГИ:")
     print(f"   Всего проверено: {len(matches)}")
     print(f"   Рабочих:      {len(working_bridges)}")
