@@ -75,7 +75,7 @@ def main_simple():
             error_msg = str(e)
             # Фильтруем не-ASCII символы
             error_msg = ''.join(c if ord(c) < 128 else '?' for c in error_msg)
-            print(f"..  error: {error_msg[:20]}")
+            print(f"..  error: {error_msg[:80]}")
     
     # Вывод результатов - только ASCII символы!
     print("\n" + "=" * 50)
