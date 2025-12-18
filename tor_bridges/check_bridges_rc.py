@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- coding: koi8-r -*-
+
 import socket
 import re
 import sys
@@ -15,22 +15,22 @@ def main_simple():
         with open('/etc/tor/torrc', 'r', encoding='utf-8') as f:
             content = f.read()
     except FileNotFoundError:
-        print("- Файл /etc/tor/torrc не найден")
+        print("- п╓п╟п╧п╩ /etc/tor/torrc п╫п╣ п╫п╟п╧п╢п╣п╫")
         sys.exit(1)
     except PermissionError:
-        print("- Нет прав на чтение файла. Используйте sudo.")
+        print("- п²п╣я┌ п©я─п╟п╡ п╫п╟ я┤я┌п╣п╫п╦п╣ я└п╟п╧п╩п╟. п≤я│п©п╬п╩я▄п╥я┐п╧я┌п╣ sudo.")
         sys.exit(1)
     
-    # Поиск мостов
+    # п÷п╬п╦я│п╨ п╪п╬я│я┌п╬п╡
     bridge_pattern = r'Bridge\s+obfs4\s+(\d+\.\d+\.\d+\.\d+):(\d+)\s+([A-F0-9]+)\s+cert=([^\s]+)\s+iat-mode=\d'
     matches = re.findall(bridge_pattern, content)
     
     if not matches:
-        print("- Мосты не найдены в файле torrc")
+        print("- п°п╬я│я┌я▀ п╫п╣ п╫п╟п╧п╢п╣п╫я▀ п╡ я└п╟п╧п╩п╣ torrc")
         sys.exit(1)
     
-    print(f"- Найдено мостов: {len(matches)}")
-    print("\n- Проверка доступности...\n")
+    print(f"- п²п╟п╧п╢п╣п╫п╬ п╪п╬я│я┌п╬п╡: {len(matches)}")
+    print("\n- п÷я─п╬п╡п╣я─п╨п╟ п╢п╬я│я┌я┐п©п╫п╬я│я┌п╦...\n")
     
     working_bridges = []
     
@@ -40,10 +40,10 @@ def main_simple():
         fingerprint = match[2]
         cert = match[3]
         
-        # Формируем оригинальную строку
+        # п╓п╬я─п╪п╦я─я┐п╣п╪ п╬я─п╦пЁп╦п╫п╟п╩я▄п╫я┐я▌ я│я┌я─п╬п╨я┐
         bridge_line = f"Bridge obfs4 {ip}:{port} {fingerprint} cert={cert} iat-mode=0"
         
-        # Проверка порта
+        # п÷я─п╬п╡п╣я─п╨п╟ п©п╬я─я┌п╟
         print(f"[{i}/{len(matches)}] {ip}:{port}", end=' - ')
         
         try:
@@ -57,42 +57,42 @@ def main_simple():
             sock.close()
             
             if result == 0:
-                print(f"- РАБОТАЕТ ({elapsed:.2f}с)")
+                print(f"- п═п░п▒п·п╒п░п∙п╒ ({elapsed:.2f}я│)")
                 working_bridges.append(bridge_line)
             else:
-                print(f"- НЕДОСТУПЕН ({elapsed:.2f}с)")
+                print(f"- п²п∙п■п·п║п╒пёп÷п∙п² ({elapsed:.2f}я│)")
                 
         except socket.timeout:
-            print("..  ТАЙМАУТ")
+            print("..  п╒п░п≥п°п░пёп╒")
         except Exception as e:
-            print(f"..  ОШИБКА: {str(e)[:20]}")
+            print(f"..  п·п╗п≤п▒п п░: {str(e)[:20]}")
     
-    # Вывод результатов
+    # п▓я▀п╡п╬п╢ я─п╣п╥я┐п╩я▄я┌п╟я┌п╬п╡
     print("\n" + "=" * 50)
-    print("ИТОГИ:")
-    print(f"   Всего проверено: {len(matches)}")
-    print(f"   Рабочих:      {len(working_bridges)}")
-    print(f"   Недоступных:  {len(matches) - len(working_bridges)}")
+    print("п≤п╒п·п⌠п≤:")
+    print(f"   п▓я│п╣пЁп╬ п©я─п╬п╡п╣я─п╣п╫п╬: {len(matches)}")
+    print(f"   п═п╟п╠п╬я┤п╦я┘:      {len(working_bridges)}")
+    print(f"   п²п╣п╢п╬я│я┌я┐п©п╫я▀я┘:  {len(matches) - len(working_bridges)}")
     
     if len(matches) > 0:
         percent = (len(working_bridges) / len(matches)) * 100
-        print(f"   - Процент:      {percent:.1f}%")
+        print(f"   - п÷я─п╬я├п╣п╫я┌:      {percent:.1f}%")
     
-    print("\n- РАБОЧИЕ МОСТЫ:")
+    print("\n- п═п░п▒п·п╖п≤п∙ п°п·п║п╒п╚:")
     print("-" * 50)
     
     if working_bridges:
         for i, bridge in enumerate(working_bridges, 1):
             print(f"{i:2d}. {bridge[:70]}..." if len(bridge) > 70 else f"{i:2d}. {bridge}")
     else:
-        print("   Нет рабочих мостов")
+        print("   п²п╣я┌ я─п╟п╠п╬я┤п╦я┘ п╪п╬я│я┌п╬п╡")
     
-    print("═" * 50)
+    print("Б∙░" * 50)
 
 if __name__ == "__main__":
     try:
         main_simple()
     except KeyboardInterrupt:
-        print("\n\nПрервано пользователем")
+        print("\n\nп÷я─п╣я─п╡п╟п╫п╬ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩п╣п╪")
     except Exception as e:
         print(f"\n Error: {e}")
