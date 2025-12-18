@@ -5,6 +5,6 @@
  - не рабочие в dead_bridges.txt
 
 
-## check_bridges_rc.py
- - проверяет доступность мостов из линукс файла /etc/tor/torrc
+## check_bridges_rc.py - вариант для ubuntu server
+ - проверяет доступность мостов из /etc/tor/torrc
  - рабочие складывает в файл bridges_works.torrc
