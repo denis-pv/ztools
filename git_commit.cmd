@@ -14,11 +14,10 @@ echo 0 - Выход
 echo.
 set /p choice="Выберите пункт: "
 
-:choice
 if "%choice%"=="1" goto auto_commit
 if "%choice%"=="2" goto manual_commit
 if "%choice%"=="3" goto log
-if "%choice%"=="0" exit 9
+if "%choice%"=="0" exit 0
 
 echo Неверный выбор! Попробуйте снова.
 goto choice
@@ -40,6 +39,7 @@ set commit_message="%commit_message%"
 git add .
 git commit -m %commit_message%
 rem git push origin main
+exit 0
 
 :log 	
 echo.
