@@ -38,7 +38,10 @@ set commit_message="%commit_message%"
 :commit
 git add .
 git commit -m %commit_message%
-rem git push origin main
+git push origin main
+echo.
+echo Обновление завершено!
+timeout /t 5 /nobreak > nul
 exit 0
 
 :log 	
